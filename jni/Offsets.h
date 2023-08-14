@@ -145,17 +145,21 @@ namespace Offsets {
     void patchUE423_32() {
         //Class: FNamePool
         FNameStride = 0x2;
-        GNamesToFNamePool = 0x30;
-        FNamePoolToCurrentBlock = 0x4;
-        FNamePoolToCurrentByteCursor = 0x8;
-        FNamePoolToBlocks = 0xC;
+        //GNamesToFNamePool = 0x30;
+        GNamesToFNamePool = 0x28;
+        FNamePoolToCurrentBlock = 0x0;
+        FNamePoolToCurrentByteCursor = 0x4;
+        FNamePoolToBlocks = 0x8;
         //Class: FNameEntry
         FNameEntryToLenBit = 6;
         FNameEntryToString = 0x2;
         //Class: TUObjectArray
         TUObjectArrayToNumElements = 0x10;
         //Class: UStruct
-        UStructToChildProperties = 0x28;
+        // ue4.26 (32): UStructToSuperStruct = 0x28; UStructToChildren = 0x2c; UStructToChildProperties = 0x30;
+        UStructToSuperStruct = 0x28;
+        UStructToChildren = 0x2c;
+        UStructToChildProperties = 0x30;
         //Class: FField
         FFieldToClass = 0x4;
         FFieldToNext = 0x10;
@@ -239,17 +243,20 @@ namespace Offsets {
     void patchUE423_64() {
         //Class: FNamePool
         FNameStride = 0x2;
-        GNamesToFNamePool = 0x30;
-        FNamePoolToCurrentBlock = 0x8;
-        FNamePoolToCurrentByteCursor = 0xC;
-        FNamePoolToBlocks = 0x10;
+        GNamesToFNamePool = 0x38;
+        FNamePoolToCurrentBlock = 0x0;
+        FNamePoolToCurrentByteCursor = 0x4;
+        FNamePoolToBlocks = 0x8;
         //Class: FNameEntry
         FNameEntryToLenBit = 6;
         FNameEntryToString = 0x2;
         //Class: TUObjectArray
         TUObjectArrayToNumElements = 0x14;
         //Class: UStruct
-        UStructToChildProperties = 0x44;
+        // ue4.26 (64): UStructToSuperStruct = 0x40; UStructToChildren = 0x48; UStructToChildProperties = 0x50;
+        UStructToSuperStruct = 0x40;
+        UStructToChildren = 0x48;
+        UStructToChildProperties = 0x50;
         //Class: FField
         FFieldToClass = 0x8;
         FFieldToNext = 0x20;
