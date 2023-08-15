@@ -2,7 +2,7 @@
 #define OFFSETS_H
 
 #include "Mem.h"
-
+//目前已经测试 //4.26.2（32位），4.25.4（32位），4.23（64位），4.20.3（64位），4.18.3（32位），4.22.3位与4.20.3位在UStructToSuperStruct位置处有变动暂未适配
 namespace Offsets {
     //Global
     kaddr GWorld;
@@ -156,14 +156,25 @@ namespace Offsets {
         //Class: TUObjectArray
         TUObjectArrayToNumElements = 0x10;
         //Class: UStruct
-        // ue4.26 (32): UStructToSuperStruct = 0x28; UStructToChildren = 0x2c; UStructToChildProperties = 0x30;
         UStructToSuperStruct = 0x28;
         UStructToChildren = 0x2c;
-        UStructToChildProperties = 0x30;
+        //Class: UFunction
+        //UE4.24 - 4.25（待修改）
+        UFunctionToFunctionFlags = 0x60;
+        UFunctionToFunc = 0x7c;
         //Class: FField
         FFieldToClass = 0x4;
         FFieldToNext = 0x10;
         FFieldToName = 0x14;
+    }
+
+    void patchUE425_32(){
+        //Class: UStruct
+        UStructToChildProperties = 0x30;
+        //Class: UFunction
+        //ue4.26 (32): UFunctionToFunctionFlags = 0x6c; UFunctionToFunc = 0x88;
+        UFunctionToFunctionFlags = 0x6c;
+        UFunctionToFunc = 0x88;
     }
 
     void patchCustom_32() {
@@ -190,8 +201,8 @@ namespace Offsets {
         FUObjectItemSize = 0x18;
 
         //---------SDK-----------
-        //Class: FNameEntry
-        FNameEntryToNameString = 0x10;
+        //Class: FNameEntry  com.rbuttongames.battlemechs FNameEntryToNameString = 0x10;(内存对齐？)
+        FNameEntryToNameString = 0xc;
         //Class: FUObjectArray
         FUObjectArrayToTUObjectArray = 0x10;
         //Class: TUObjectArray
@@ -253,14 +264,24 @@ namespace Offsets {
         //Class: TUObjectArray
         TUObjectArrayToNumElements = 0x14;
         //Class: UStruct
-        // ue4.26 (64): UStructToSuperStruct = 0x40; UStructToChildren = 0x48; UStructToChildProperties = 0x50;
         UStructToSuperStruct = 0x40;
         UStructToChildren = 0x48;
-        UStructToChildProperties = 0x50;
+        //Class: UFunction
+        UFunctionToFunctionFlags = 0x98;
+        UFunctionToFunc = 0xc0;
         //Class: FField
         FFieldToClass = 0x8;
         FFieldToNext = 0x20;
         FFieldToName = 0x28;
+    }
+
+    void patchUE425_64(){
+        //Class: UStruct
+        UStructToChildProperties = 0x50;
+        //ue4.26 (64位): UFunctionToFunctionFlags = 0xb0; UFunctionToFunc = 0xd8;
+        UFunctionToFunctionFlags = 0xb0;
+        UFunctionToFunc = 0xd8;
+
     }
 
     void patchCustom_64() {

@@ -58,7 +58,7 @@ struct WideStr {
 };
 
 string GetFNameFromID(uint32 index) {
-    if (isUE423) {
+    if (isUE423_UE425 || isUE425) {
         uint32 Block = index >> 16;
         uint16 Offset = index & 65535;
 
@@ -213,7 +213,7 @@ void DumpStrings(string out) {
     if (gname.is_open()) {
         cout << "Dumping Strings" << endl;
         clock_t begin = clock();
-        if (isUE423) {
+        if (isUE423_UE425 || isUE425) {
             kaddr FNamePool = getRealOffset(Offsets::GNames) + Offsets::GNamesToFNamePool;
 
             uint32 BlockSize = Offsets::FNameStride * 65536;

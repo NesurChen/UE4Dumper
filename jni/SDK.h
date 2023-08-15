@@ -159,7 +159,7 @@ bool isScanned(uint32 id) {
     }
     return false;
 }
-
+//ue4.23版本以下dump类的字段和函数信息
 list<kaddr> writeStructChild(ofstream &sdk, kaddr childprop) {
     list<kaddr> recurrce;
     kaddr child = childprop;
@@ -355,7 +355,7 @@ list<kaddr> writeStructChild(ofstream &sdk, kaddr childprop) {
     }
     return recurrce;
 }
-
+//ue4.23版本以上dump类中的字段信息
 list<kaddr> writeStructChild423(ofstream &sdk, kaddr childprop) {
     list<kaddr> recurrce;
     kaddr child = childprop;
@@ -496,7 +496,7 @@ list<kaddr> writeStructChild423(ofstream &sdk, kaddr childprop) {
     }
     return recurrce;
 }
-
+//ue4.23版本以上dump类中的函数信息
 list<kaddr> writeStructChild423_Func(ofstream &sdk, kaddr childprop) {
     list<kaddr> recurrce;
     kaddr child = childprop;
@@ -594,10 +594,11 @@ void writeStruct(ofstream &sdk, kaddr clazz) {
             //Dumping
             structIDMap.push_back(NameID);
             sdk << "Class: " << UStruct::getStructClassPath(currStruct) << endl;
-            if (isUE423) {
+            if (isUE425) {
                 recurrce.merge(writeStructChild423(sdk, UStruct::getChildProperties(currStruct)));
                 recurrce.merge(writeStructChild423_Func(sdk, UStruct::getChildren(currStruct)));
             } else {
+                //ue4.25版本以下
                 recurrce.merge(writeStructChild(sdk, UStruct::getChildren(currStruct)));
             }
             sdk << "\n--------------------------------" << endl;
@@ -679,7 +680,7 @@ void TestDump(kaddr uobj) {
 
     HexDump(clazz, 50);
 
-    if (isUE423) {
+    if (isUE423_UE425 || isUE425) {
         //Props
         kaddr child = UStruct::getChildProperties(clazz);
         while (child) {

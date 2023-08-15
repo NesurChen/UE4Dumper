@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const char *short_options = "hlrfnsabcdevi:j:p:o:g:u:w:";
+const char *short_options = "hlrfnsabckdevi:j:p:o:g:u:w:";
 const struct option long_options[] = {
         {"help",       no_argument,       nullptr, 'h'},
         {"lib",        no_argument,       nullptr, 'l'},
@@ -15,6 +15,7 @@ const struct option long_options[] = {
         {"sdku",       no_argument,       nullptr, 'a'},
         {"sdkw",       no_argument,       nullptr, 'b'},
         {"newue",      no_argument,       nullptr, 'c'},
+        {"newue+",     no_argument,       nullptr, 'k'},
         {"actors",     no_argument,       nullptr, 'd'},
         {"ptrdec",     no_argument,       nullptr, 'e'},
         {"verbose",    no_argument,       nullptr, 'v'},
@@ -58,7 +59,8 @@ void Usage() {
     printf("  --gname <address>                   GNames Pointer Address\n");
     printf("  --gworld <address>                  GWorld Pointer Address\n");
     printf("--Other Args-----------------------------------------------------------------------------\n");
-    printf("  --newue(Optional)                   Run in UE 4.23+ Mode\n");
+    printf("  --newue(Optional)                   Run in 4.23 <= UE < 4.25 Mode\n");
+    printf("  --newue+(Optional)                   Run in 4.25 <= UE Mode\n");
     printf("  --ptrdec(Optional)                  Use Pointer Decryption Mode\n");
     printf("  --verbose(Optional)                 Show Verbose Output of Dumping\n");
     printf("  --derefgname(Optional) <true/false> De-Reference GNames Address(Default: true)\n");
@@ -128,7 +130,10 @@ int main(int argc, char *argv[]) {
                 isSdkDump2 = true;
                 break;
             case 'c':
-                isUE423 = true;
+                isUE423_UE425 = true;
+                break;
+            case 'k':
+                isUE425 = true;
                 break;
             case 'd':
                 isActorDump = true;
@@ -153,14 +158,20 @@ int main(int argc, char *argv[]) {
 
 #if defined(__LP64__)
     Offsets::initOffsets_64();
-    if (isUE423) {
+    if (isUE423_UE425 || isUE425) {
         Offsets::patchUE423_64();
+        if(isUE425){
+            Offsets::patchUE425_64();
+        }
     }
     Offsets::patchCustom_64();
 #else
     Offsets::initOffsets_32();
-    if (isUE423) {
+    if (isUE423_UE425 || isUE425) {
         Offsets::patchUE423_32();
+        if(isUE425){
+            Offsets::patchUE425_32();
+        }
     }
     Offsets::patchCustom_32();
 #endif
