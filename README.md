@@ -63,7 +63,9 @@ Unreal Engine 4 Dumper for Android Devices, Dump Lib libUE4.so from Memory of Ga
     - 5) Added GWorld and GName Workaround for PUBGM Series
     - 6) Offsets are not upto date with latest game versions so please update them yourself
     - 7) And in the end, this is probably last and final update of UE4Dumper
-
+- v0.21:
+    - 1) add ue422 and newue+ two args
+    - 2) Detailed compatibility with the ue4 version
 ## Features
 - No need of Ptrace
 - Bypass Anti Debugging
@@ -122,7 +124,9 @@ Unreal Engine 4 Dumper for Android Devices, Dump Lib libUE4.so from Memory of Ga
       --gname <address>                   GNames Pointer Address
       --gworld <address>                  GWorld Pointer Address
     --Other Args-----------------------------------------------------------------------------
-      --newue(Optional)                   Run in UE 4.23+ Mode
+      --ue422(Optional)                   Run in 4.22 <= UE < 4.23 Mode;
+      --newue(Optional)                   Run in 4.23 <= UE < 4.25 Mode";
+      --newue+(Optional)                  Run in 4.25 <= UE Mode;
       --ptrdec(Optional)                  Use Pointer Decryption Mode
       --verbose(Optional)                 Show Verbose Output of Dumping
       --derefgname(Optional) <true/false> De-Reference GNames Address(Default: true)
