@@ -2,7 +2,8 @@
 #define OFFSETS_H
 
 #include "Mem.h"
-//目前已经测试 //4.26.2（32位），4.25.4（32位），4.23（64位），4.20.3（64位），4.18.3（32位），4.22.3位与4.20.3位在UStructToSuperStruct位置处有变动暂未适配
+//目前已经测试 //4.27(64位)， 4.26.2（32位），4.25.4（32位），4.23（64位），4.22（64位），4.20.3（64位），4.18.3（32位）
+//注意64位需要考虑类内存对齐的问题
 namespace Offsets {
     //Global
     kaddr GWorld;
@@ -142,6 +143,15 @@ namespace Offsets {
         ULevelToAActorsCount = 0x74;
     }
 
+    void patchUE422_32(){
+        //Class: UStruct
+        UStructToSuperStruct = 0x28;
+        UStructToChildren = 0x2c;
+        //Class: UFunction
+        UFunctionToFunctionFlags = 0x60;
+        UFunctionToFunc = 0x7c;
+    }
+
     void patchUE423_32() {
         //Class: FNamePool
         FNameStride = 0x2;
@@ -201,8 +211,8 @@ namespace Offsets {
         FUObjectItemSize = 0x18;
 
         //---------SDK-----------
-        //Class: FNameEntry  com.rbuttongames.battlemechs FNameEntryToNameString = 0x10;(内存对齐？)
-        FNameEntryToNameString = 0xc;
+        //Class: FNameEntry（注意内存对齐
+        FNameEntryToNameString = 0x10;
         //Class: FUObjectArray
         FUObjectArrayToTUObjectArray = 0x10;
         //Class: TUObjectArray
@@ -221,16 +231,16 @@ namespace Offsets {
         UFunctionToFunctionFlags = 0x88;
         UFunctionToFunc = 0xB0;
         //Class: UProperty
-        UPropertyToElementSize = 0x34;
-        UPropertyToPropertyFlags = 0x38;
-        UPropertyToOffsetInternal = 0x44;
+        UPropertyToElementSize = 0x34;          
+        UPropertyToPropertyFlags = 0x38;        
+        UPropertyToOffsetInternal = 0x44;       
         //Class: UBoolProperty
         UBoolPropertyToFieldSize = 0x70;
         UBoolPropertyToByteOffset = 0x71;
         UBoolPropertyToByteMask = 0x72;
         UBoolPropertyToFieldMask = 0x73;
         //Class: UObjectProperty
-        UObjectPropertyToPropertyClass = 0x70;
+        UObjectPropertyToPropertyClass = 0x70; 
         //Class: UClassProperty
         UClassPropertyToMetaClass = 0x78;
         //Class: UInterfaceProperty
@@ -249,6 +259,17 @@ namespace Offsets {
         //Class: ULevel
         ULevelToAActors = 0x98;
         ULevelToAActorsCount = 0xA0;
+    }
+
+    void patchUE422_64(){
+        //Class: FNameEntry
+        FNameEntryToNameString = 0xc;
+        //Class: UStruct
+        UStructToSuperStruct = 0x40;
+        UStructToChildren = 0x48;
+        //Class: UFunction
+        UFunctionToFunctionFlags = 0x98;
+        UFunctionToFunc = 0xc0;
     }
 
     void patchUE423_64() {
@@ -281,7 +302,12 @@ namespace Offsets {
         //ue4.26 (64位): UFunctionToFunctionFlags = 0xb0; UFunctionToFunc = 0xd8;
         UFunctionToFunctionFlags = 0xb0;
         UFunctionToFunc = 0xd8;
-
+        //Class: UProperty
+        UPropertyToElementSize = 0x38;          
+        UPropertyToPropertyFlags = 0x40;        
+        UPropertyToOffsetInternal = 0x4c;       
+        //Class: UObjectProperty
+        UObjectPropertyToPropertyClass = 0x78; 
     }
 
     void patchCustom_64() {

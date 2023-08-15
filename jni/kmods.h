@@ -28,6 +28,7 @@
 #include "ELF/ElfRebuilder.h"
 #endif
 
+bool isUE422 = false;
 bool isUE423_UE425 = false;
 bool isUE425 = false;
 bool isPUBGNS = false;
