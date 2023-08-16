@@ -733,6 +733,7 @@ void DumpActors() {
     cout << "ActorList: " << setbase(16) << actorList << ", ActorCount: " << setbase(10)
          << actorsCount << "\n" << endl;
 
+
     for (int i = 0; i < actorsCount; i++) {
         kaddr actor = getPtr(actorList + (i * sizeof(kaddr)));
         if (UObject::isValid(actor)) {
@@ -742,6 +743,8 @@ void DumpActors() {
             cout << "Id: " << setbase(10) << i << ", Addr: " << setbase(16) << actor << endl;
         }
     }
+
+    
 }
 
 #endif

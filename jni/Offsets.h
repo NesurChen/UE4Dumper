@@ -256,9 +256,9 @@ namespace Offsets {
         UStructPropertyToStruct = 0x70;
         //Class: UWorld
         UWorldToPersistentLevel = 0x30;
-        //Class: ULevel
-        ULevelToAActors = 0x98;
-        ULevelToAActorsCount = 0xA0;
+        //Class: ULevel  98 , a0
+        ULevelToAActors = 0xa0;
+        ULevelToAActorsCount = 0xA8;
     }
 
     void patchUE422_64(){
@@ -270,6 +270,9 @@ namespace Offsets {
         //Class: UFunction
         UFunctionToFunctionFlags = 0x98;
         UFunctionToFunc = 0xc0;
+        //Class: ULevel
+        ULevelToAActors = 0x98;
+        ULevelToAActorsCount = 0xa0;
     }
 
     void patchUE423_64() {
@@ -294,6 +297,9 @@ namespace Offsets {
         FFieldToClass = 0x8;
         FFieldToNext = 0x20;
         FFieldToName = 0x28;
+        //Class: ULevel
+        ULevelToAActors = 0x98;
+        ULevelToAActorsCount = 0xa0;
     }
 
     void patchUE425_64(){
@@ -308,6 +314,7 @@ namespace Offsets {
         UPropertyToOffsetInternal = 0x4c;       
         //Class: UObjectProperty
         UObjectPropertyToPropertyClass = 0x78; 
+        
     }
 
     void patchCustom_64() {
