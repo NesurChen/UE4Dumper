@@ -39,7 +39,7 @@ kaddr GetUObjectFromID(uint32 index) {
         } else {
             FUObjectArray = getRealOffset(Offsets::GUObjectArray);
         }
-        kaddr TUObjectArray = getPtr(FUObjectArray + Offsets::FUObjectArrayToTUObjectArray);
+        kaddr TUObjectArray = getPtr(getPtr(FUObjectArray + Offsets::FUObjectArrayToTUObjectArray));
 
         return getPtr(TUObjectArray + (index * Offsets::FUObjectItemSize));
     }
