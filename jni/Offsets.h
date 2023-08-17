@@ -256,7 +256,7 @@ namespace Offsets {
         UStructPropertyToStruct = 0x70;
         //Class: UWorld
         UWorldToPersistentLevel = 0x30;
-        //Class: ULevel  98 , a0
+        //Class: ULevel
         ULevelToAActors = 0xa0;
         ULevelToAActorsCount = 0xA8;
     }
@@ -311,10 +311,27 @@ namespace Offsets {
         //Class: UProperty
         UPropertyToElementSize = 0x38;          
         UPropertyToPropertyFlags = 0x40;        
-        UPropertyToOffsetInternal = 0x4c;       
+        UPropertyToOffsetInternal = 0x4c;   
+        //Class: UBoolProperty
+        UBoolPropertyToFieldSize = 0x78;
+        UBoolPropertyToByteOffset = 0x79;
+        UBoolPropertyToByteMask = 0x7a;
+        UBoolPropertyToFieldMask = 0x7b;
         //Class: UObjectProperty
         UObjectPropertyToPropertyClass = 0x78; 
-        
+        //Class: UClassProperty
+        UClassPropertyToMetaClass = 0x80;
+        //Class: UInterfaceProperty
+        UInterfacePropertyToInterfaceClass = 0x80;
+        //Class: UArrayProperty
+        UArrayPropertyToInnerProperty = 0x78;
+        //Class: UMapProperty
+        UMapPropertyToKeyProp = 0x78;
+        UMapPropertyToValueProp = 0x80;
+        //Class: USetProperty
+        USetPropertyToElementProp = 0x78;
+        //Class: UStructProperty
+        UStructPropertyToStruct = 0x78;
     }
 
     void patchCustom_64() {
